@@ -1,0 +1,12 @@
+{% extends 'SCalendar/base.html' %}
+{% load static %}
+{% block title %}Register - SCalendar{% endblock %}
+{% block content %}
+    <h1>Register for SCalendar</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'users:login' %}">Login</a></p>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}ChipIn{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'SCalendar/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="user-info">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'chipin:home' %}">Home</a> <span>{{ request.user.profile.nickname }}</span>
+                <form action="{% url 'users:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'users:login' %}">Login</a> <a href="{% url 'users:register' %}">Register</a>
+            {% endif %}
+        </div>
+    </header>
+</body>
+</html>
