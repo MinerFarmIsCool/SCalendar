@@ -1,1 +1,31 @@
 /* Make sure to include the logo in the static directory, as long as other needed images probably */
+
+/* Style for the messages */
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    color: red; /* Change this color based on your message type */
+}
+
+/* Individual message items */
+.messages li {
+    margin-bottom: 5px;
+}
+
+/* Styling for message tags, like error or success */
+.messages li.error {
+    color: red;
+}
+
+.messages li.success {
+    color: green;
+}
+
+.errorlist {
+    color: red;
+}
+
+.errorlist li {
+    color: red;
+}
