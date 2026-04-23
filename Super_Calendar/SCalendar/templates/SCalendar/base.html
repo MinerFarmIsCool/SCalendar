@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}ChipIn{% endblock %}</title>
+    <title>{% block title %}SCalendar{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'SCalendar/styles.css' %}">
 </head>
 <body>
     <header>
         <div class="user-info">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'chipin:home' %}">Home</a> <span>{{ request.user.profile.nickname }}</span>
+                <a href="{% url 'SCalendar:home' %}">Home</a> <span>{{ request.user.profile.nickname }}</span>
                 <form action="{% url 'users:logout' %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Logout</button>
@@ -19,5 +19,16 @@
             {% endif %}
         </div>
     </header>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>

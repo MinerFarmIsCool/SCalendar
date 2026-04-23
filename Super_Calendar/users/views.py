@@ -62,7 +62,7 @@ def login_view(request):
             login(request, user)
             # rotate honeypot name after each successful POST
             request.session["hp_name"] = f"hp_{secrets.token_hex(8)}"
-            next_url = request.GET.get("next", reverse("chipin:home"))
+            next_url = request.GET.get("next", reverse("SCalendar:home"))
             return redirect(next_url)
         else:
             messages.error(request, "Invalid username or password.")
