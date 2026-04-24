@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventForm
 from django.contrib.auth.decorators import login_required
 
+from .models import Event
 
 
 # Create your views here.
@@ -21,3 +22,8 @@ def create_event(request):
     else:
         form = EventForm(profile = request.user.profile)
     return render(request, "SCalendar/create_event.html", {"form": form})
+
+@login_required(login_url="users:login")
+def event_list(request):
+    events = Event.objects.all()
+    return render(request, "SCalendar/event_list.html", {"events": events})

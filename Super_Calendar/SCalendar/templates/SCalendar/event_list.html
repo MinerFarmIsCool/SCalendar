@@ -1,0 +1,41 @@
+{% extends 'SCalendar/base.html' %}
+{% load static %}
+{% block title %}SCalendar Home{% endblock %}
+{% block content %}
+    <div style="max-height: 300px; overflow-y: auto; margin-bottom: 16px;">
+        <table style="border-collapse: collapse; width: 100%">
+        <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>All Day</th>
+            <th>Repeat</th>
+            <th>Display Colour</th>
+            <th>Created at</th>
+            <th>Security Level</th>
+            <th>Opacity</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.start_time }}</td>
+                    <td>{{ event.end_time }}</td>
+                    <td>{{ event.description }}</td>
+                    <td>{{ event.location }}</td>
+                    <td>{{ event.all_day }}</td>
+                    <td>{{ event.repeat }}</td>
+                    <td>{{ event.display_colour }}</td>
+                    <td>{{ event.created_at }}</td>
+                    <td>{{ event.security_level }}</td>
+                    <td>{{ event.opacity }}</td>
+            {% empty %}
+                    <td>No events</td>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

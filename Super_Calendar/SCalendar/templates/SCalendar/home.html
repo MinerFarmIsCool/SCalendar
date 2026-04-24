@@ -4,4 +4,5 @@
 {% block content %}
     <h1>MEOW!</h1>
     <a href="{% url 'SCalendar:create_event' %}?user_id={{ request.user.id }}">Create Event</a>
+    <a href="{% url 'SCalendar:event_list' %}?user_id={{ request.user.id }}">View Events</a>
 {% endblock %}
