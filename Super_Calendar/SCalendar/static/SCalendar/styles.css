@@ -1,5 +1,13 @@
 /* Make sure to include the logo in the static directory, as long as other needed images probably */
 
+.base-body {
+    margin: 0;
+}
+
+.main {
+    margin: 8px
+}
+
 /* Style for the messages */
 .messages {
     list-style-type: none;
@@ -28,4 +36,65 @@
 
 .errorlist li {
     color: red;
+}
+
+.header-bar {
+    background-color: #53c0ce;
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    border: 2px solid #000000;
+}
+
+.site-guide {
+    position: relative;
+    left: 250px;
+}
+
+.site-guide img {
+    width: 128px;
+    height: 128px;
+    border: 3px solid #000000;
+}
+
+.time-display {
+    position: relative;
+    right: 250px;
+}
+
+.user-info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    right: 10px;
+    font-size: 24px;
+}
+
+.user-info button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    background-color: #c90e2b;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    border-radius: 16px;
+    height: 48px;
+    width: 120px;
+    font-size: 24px;
+}
+
+.logo {
+    position: relative;
+    left: 10px;
+}
+
+.logo img {
+    width: 128px;
+    height: 128px;
+    border: 3px solid #000000;
 }

@@ -4,24 +4,50 @@
 <head>
     <title>{% block title %}SCalendar{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'SCalendar/styles.css' %}">
+    <link rel="icon" type="image/jpeg" href="{% static 'SCalendar/urple.png' %}">
 </head>
-<body>
+<body class="base-body">
     <header>
+    <div class="header-bar">
         <div class="logo">
             <a href="{% url 'SCalendar:home' %}"> <img src="{% static 'SCalendar/logo_90.jpg' %}" alt="The Logo"> </a>
         </div>
+        <div class="time-display">
+            <!-- <p>The current time is: <time id="current-time"></time> and the current date is: <time id="current-date"></time></p>  -->
+            <h2> <time id="current-time"> </time> </h2>
+            <h2> <time id="current-date"> </time> </h2>
+
+            <script>
+              function updateTime() { // Function that first gets the time and date string and then converts it into seperate readable time and date strings.
+                const now = new Date();
+                document.getElementById('current-time').innerText = now.toLocaleTimeString();
+                document.getElementById('current-date').innerText = now.toLocaleDateString();
+              }
+              setInterval(updateTime, 1000); // Updates every second
+              updateTime(); // Initial call
+
+            </script>
+        </div>
+        <div class="site-guide">
+            <img src="{% static 'SCalendar/QuestionMark.png' %}" alt="Site Guide">
+        </div>
         <div class="user-info">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'SCalendar:home' %}">Home</a> <span>{{ request.user.profile.nickname }}</span>
+                <p>{{ request.user.username }}</p>
                 <form action="{% url 'users:logout' %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form>
             {% else %}
-                <a href="{% url 'users:login' %}">Login</a> <a href="{% url 'users:register' %}">Register</a>
+                <button type="submit"><a href="{% url 'users:login' %}">Login</a></button>
+                <button type="submit>"><a href="{% url 'users:register' %}">Register</a></button>
             {% endif %}
         </div>
+
+
+    </div>
     </header>
+    <div class="main">
     {% if messages %}
         <ul class="messages">
         {% for message in messages %}
@@ -33,5 +59,6 @@
         {% block content %}
         {% endblock %}
     </main>
+    </div>
 </body>
 </html>
