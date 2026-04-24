@@ -3,4 +3,5 @@
 {% block title %}SCalendar Home{% endblock %}
 {% block content %}
     <h1>MEOW!</h1>
+    <a href="{% url 'SCalendar:create_event' %}?user_id={{ request.user.id }}">Create Event</a>
 {% endblock %}

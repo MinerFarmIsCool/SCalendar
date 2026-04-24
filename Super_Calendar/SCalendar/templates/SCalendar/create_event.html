@@ -1,0 +1,14 @@
+{% extends 'SCalendar/base.html' %}
+{% block title %}Create a New Event{% endblock %}
+{% block content %}
+    <h1>Create a New Event</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Event</button>
+    </form>
+    <a href="{% url 'SCalendar:home' %}">Back to Homepage</a>
+    <br>
+    <br>
+    <h1>WARNING: REPEAT DOES NOT CURRENTLY DO ANYTHING!!! IT MAY BREAK IN FUTURE VERSIONS!!!</h1>
+{% endblock %}

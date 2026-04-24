@@ -85,7 +85,7 @@ def register_view(request):
 
 @login_required(login_url="users:login")
 def user(request):
-    return render(request, "SCalendar:home.html")
+    return render(request, "SCalendar/home.html")
 
 def logout_view(request):
     logout(request)

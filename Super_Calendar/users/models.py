@@ -22,6 +22,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
+
 def _unique_nickname(base: str) -> str:
     """
     Generate a unique nickname from a base string (e.g., username).
