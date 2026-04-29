@@ -17,6 +17,8 @@
             <th>Created at</th>
             <th>Security Level</th>
             <th>Opacity</th>
+            <th>Edit Task</th>
+            <th>Delete Task</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +35,8 @@
                     <td>{{ event.created_at }}</td>
                     <td>{{ event.security_level }}</td>
                     <td>{{ event.opacity }}</td>
+                    <td><a href="{% url 'SCalendar:edit_event' event.id %}">Edit</a></td>
+                    <td><a href="{% url 'SCalendar:delete_event' event.id %}" onclick="return confirm('Are you sure?')">Delete</a></td>
             {% empty %}
                     <td>No events</td>
             {% endfor %}
