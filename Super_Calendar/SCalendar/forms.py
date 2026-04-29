@@ -31,15 +31,12 @@ class EventForm(forms.ModelForm):
             'opacity': forms.NumberInput(attrs={'min': 0, 'max': 100}),
         }
 
-
-
-
     def save(self, commit=True):
         event = super().save(commit=False)
         event.profile = self.profile
         event.validate_opacity()
         event.validate_time()
-        #event.calculate_duration()
+        event.calculate_duration()
         if commit:
             event.save()
         return event

@@ -32,8 +32,10 @@ class Event(models.Model):
 
     def calculate_duration(self):
         if self.all_day:
-            return 24
-        return 1
+            self.duration = 24
+        dur = self.start_time - self.end_time
+        self.duration = dur.total_seconds() / 3600
+        self.duration = round(self.duration, 2)
 
     def validate_opacity(self): # Can't validate opacity in the database, so we do it here, if it's an invalid value, it will be set to 100. This will also be done in the form, so this code is mostly a double checker
         if self.opacity < 0 or self.opacity > 100:
@@ -43,14 +45,21 @@ class Event(models.Model):
         return self.name
 
     def validate_time(self):
-        meow1 = self.start_time.replace(tzinfo=None)
-        meow2 = self.end_time.replace(tzinfo=None)
+        start_time = self.start_time.replace(tzinfo=None)
+        end_time = self.end_time.replace(tzinfo=None)
+        start_date = self.start_time.date()
+        end_date = self.end_time.date()
         if self.start_time > self.end_time:
             raise ValidationError("Start time must be before end time")
-        if meow1 < datetime(2000, 1, 1, 0, 0):
+        if start_time < datetime(2000, 1, 1, 0, 0):
             raise ValidationError("Start time must be after 1/1/2000")
-        if meow2 > datetime(2050, 1, 1, 0, 0):
+        if end_time > datetime(2050, 1, 1, 0, 0):
             raise ValidationError("End time must be before 1/1/2050")
+        if self.all_day:
+            if start_date != end_date:
+                raise ValidationError("Start day must be equal to end day")
+
+
 
 
 
