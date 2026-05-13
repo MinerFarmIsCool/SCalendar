@@ -1,0 +1,42 @@
+{% extends 'SCalendar/base.html' %}
+{% load static %}
+{% block title %}Personal Calendar{% endblock %}
+{% block content %}
+    <h1>Personal Calendar!</h1>
+    <a href="{% url 'SCalendar:create_event' %}?user_id={{ request.user.id }}">Create Event</a>
+    <a href="{% url 'SCalendar:event_list' %}?user_id={{ request.user.id }}">View Events</a>
+
+    <div class="datepicker-container">
+        <div class="datepicker-header">
+            <h2 id="monthYear">January 2023</h2>
+            <button id="prevMonth">Previous</button>
+            <button id="nextMonth">Next</button>
+            <button id="today">Today</button>
+            <button id="prevYear">Previous Year</button>
+            <button id="nextYear">Next Year</button>
+        </div>
+
+        <table class="calendar">
+            <thead>
+                <tr>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                    <th>Sun</th>
+                </tr>
+            </thead>
+            <tbody id="calendarBody">
+                <!-- Calendar days will be inserted here with JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    <div class="Calendar-containter">
+    <!-- Probably a table or smthn -->
+    </div>
+
+
+    <script src="{% static 'SCalendar/calendar.js' %}"></script>
+{% endblock %}
