@@ -32,46 +32,7 @@
             </tbody>
         </table>
     </div>
-    <div class="Calendar-containter">
-        <div class = "Calendar-header">
-            <h1 id="currentDay"> a </h1>
-            <button id="prevDay">Previous Day</button>
-            <button id="nextDay">Next Day</button>
 
-        </div>
-        <div class="Calendar-body">
-            <div class="times">
-                <p>12:00 AM</p>
-                <p>1:00 AM</p>
-                <p>2:00 AM</p>
-                <p>3:00 AM</p>
-                <p>4:00 AM</p>
-                <p>5:00 AM</p>
-                <p>6:00 AM</p>
-                <p>7:00 AM</p>
-                <p>8:00 AM</p>
-                <p>9:00 AM</p>
-                <p>10:00 AM</p>
-                <p>11:00 AM</p>
-                <p>12:00 PM</p>
-                <p>1:00 PM</p>
-                <p>2:00 PM</p>
-                <p>3:00 PM</p>
-                <p>4:00 PM</p>
-                <p>5:00 PM</p>
-                <p>6:00 PM</p>
-                <p>7:00 PM</p>
-                <p>8:00 PM</p>
-                <p>9:00 PM</p>
-                <p>10:00 PM</p>
-                <p>11:00 PM</p>
-            </div>
-            <table class="calendar">
-                <tbody id="calendarBody">
-                </tbody>
-            </table>
-        </div>
-    </div>
     <div class="Group-list">
         <table class="group-list">
             <thead>
@@ -84,7 +45,21 @@
             </tbody>
         </table>
     </div>
+    <div id="calendar"></div>
+
+    {{  events|json_script:"events-data" }}
 
     <script src="{% static 'SCalendar/datepicker.js' %}"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js'></script>
     <script src="{% static 'SCalendar/calendar.js' %}"></script>
+
+<dialog id="event-popup">
+    <h2 id="event-name">*event name*</h2>
+    <p id="event-details">*event details*</p>
+
+    <button id="exit">Close</button>
+    <button id="edit-event">Edit</button>
+    <button id="delete-event">Delete</button>
+</dialog>
+
 {% endblock %}

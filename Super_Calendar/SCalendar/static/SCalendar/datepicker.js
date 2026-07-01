@@ -8,6 +8,7 @@ document.getElementById('today').addEventListener('click', today);
 document.getElementById('prevYear').addEventListener('click', prevYear);
 document.getElementById('nextYear').addEventListener('click', nextYear);
 
+// this renders the datepicker and fills it in with the dates. it also contains an event listener for clicking on dates
 function displayCalendar(month, year) {
     const calendarBody = document.getElementById('calendarBody');
     calendarBody.innerHTML = ""; // Clear previous cells
@@ -34,6 +35,7 @@ function displayCalendar(month, year) {
             } else {
                 // Fill cell with the date
                 cell.textContent = date;
+                cell.addEventListener('click', setCalendarDate);
                 if (date === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
                     cell.classList.add('current-day');
                 }
@@ -62,13 +64,16 @@ function nextMonth() {
     }
     displayCalendar(currentMonth, currentYear);
 }
+
+// set date to today
 function today() {
     currentMonth = new Date().getMonth();
     currentYear = new Date().getFullYear();
     displayCalendar(currentMonth, currentYear);
-    currentDay = new Date().getDay();
-    currentDate = new Date().getDate();
-    displayCurrentDay(currentDay, currentDate, currentMonth, currentYear);
+    // currentDay = new Date().getDay();
+    // currentDate = new Date().getDate();
+    // displayCurrentDay(currentDay, currentDate, currentMonth, currentYear);
+    window.calendar.gotoDate(new Date().toISOString())
 }
 function prevYear() {
     currentYear = currentYear - 1;
@@ -84,6 +89,26 @@ function nextYear() {
     }
     displayCalendar(currentMonth, currentYear);
 }
+// set the date for the calendar when you click on a date in the datepicker
+function setCalendarDate(event) {
+
+    const cell = event.currentTarget;
+    console.log(cell.textContent, currentMonth, currentYear);
+    var isoDate = Number(cell.textContent)
+    var isoMonth = currentMonth + 1
+    if (isoMonth < 10) {
+        isoMonth = `0${isoMonth}`
+    }
+    console.log(isoMonth)
+    if (isoDate < 10) {
+        isoDate = `0${isoDate}`
+    }
+
+    let clicked_date = `${currentYear}-${isoMonth}-${isoDate}`
+    console.log(clicked_date)
+
+    window.calendar.gotoDate(clicked_date)
+}
+
 // Initialize the calendar with the current month and year
 displayCalendar(currentMonth, currentYear);
-

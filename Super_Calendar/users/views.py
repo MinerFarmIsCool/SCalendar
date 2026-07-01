@@ -18,7 +18,7 @@ def _hp_name(request):
         request.session["hp_name"] = f"hp_{secrets.token_hex(8)}"
     return request.session["hp_name"]
 
-
+#login to account
 def login_view(request):
     hp_name = _hp_name(request)
 
@@ -72,6 +72,7 @@ def login_view(request):
     next_url = request.GET.get("next", "")
     return render(request, "users/login.html", {"hp_name": hp_name, "next": next_url})
 
+#register account
 def register_view(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
@@ -87,6 +88,7 @@ def register_view(request):
 def user(request):
     return render(request, "SCalendar/home.html")
 
+#logout of account
 def logout_view(request):
     logout(request)
     messages.success(request, "Successfully logged out.")

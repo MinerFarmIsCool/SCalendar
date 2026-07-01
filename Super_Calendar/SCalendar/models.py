@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 from users.models import Profile
@@ -27,7 +28,7 @@ class Event(models.Model):
     display_color = models.CharField(max_length=7)
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated_at = models.DateTimeField(auto_now=True)
-    security_level = models.IntegerField(default=5)
+    security_level = models.IntegerField(default=5) # NEED TO UPDATE TO REMOVE
     opacity = models.IntegerField(default=100)
 
     def calculate_duration(self):
@@ -59,6 +60,15 @@ class Event(models.Model):
             if start_date != end_date:
                 raise ValidationError("Start day must be equal to end day")
 
+
+class Group(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    members = models.ManyToManyField(Profile, related_name="members")
+    admin_user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name="admin_user")
+    events = models.ManyToManyField(Event, related_name="events")
+
+    
 
 
 

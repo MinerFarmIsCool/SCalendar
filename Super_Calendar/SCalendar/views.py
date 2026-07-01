@@ -52,5 +52,36 @@ def delete_event(request, event_id): # Deletes the event after checking if the u
         messages.error(request, f"Event '{event.name}' not deleted. You are not allowed to delete this event.")
     return redirect("SCalendar:home")
 
+@login_required(login_url="users:login")
 def view_personal_calendar(request):
-    return render(request, "SCalendar/personal_calendar.html")
+    raw_events = Event.objects.filter(profile = request.user.profile)
+    events = []
+    for event in raw_events:
+        event_dict = event_to_dict(event)
+        events.append(event_dict)
+        print(events)
+
+    return render(request, "SCalendar/personal_calendar.html", {"events": events})
+# converts the event object to a dictionary for rendering with javascript
+def event_to_dict(event):
+    if event.all_day:
+        new_dict = {
+            "title": event.name,
+            "start": event.start_time.isoformat(),
+            "description": event.description,
+            "location": event.location,
+            "backgroundColor": event.display_color,
+            "allDay": event.all_day,
+            "pk": event.pk
+        }
+    else:
+        new_dict = {
+            "title": event.name,
+            "start": event.start_time.isoformat(),
+            "end": event.end_time.isoformat(),
+            "description": event.description,
+            "location": event.location,
+            "backgroundColor": event.display_color,
+            "pk": event.pk
+        }
+    return new_dict
